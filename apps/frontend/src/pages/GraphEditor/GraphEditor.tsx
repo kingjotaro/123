@@ -57,6 +57,7 @@ function ReactFlowSandbox() {
         source: "start",
         target: initialNodes[1].id,
       }),
+      
     ];
     const [positionedNodes, positionedEdges] = positionNodes(
       initialNodes,

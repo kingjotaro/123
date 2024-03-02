@@ -1,0 +1,22 @@
+{
+  "name": "dev-1",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "type": "module",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "turbo": "^1.11.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.2.5",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
