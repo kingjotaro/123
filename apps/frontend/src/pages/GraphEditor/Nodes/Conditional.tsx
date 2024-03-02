@@ -20,6 +20,7 @@ export function ConditionalNode({ data }: NodeProps<ConditionalNodeData>) {
         }}
       >
         <div className="p-9 flex items-center justify-center text-[12px] text-center w-full h-full relative">
+          
           <div
             className={`group-hover-focus:cursor-pointer absolute left-0 top-0 w-full h-full text-Y-300 [&>svg]:stroke-Y-600 group-hover:text-Y-350 z-0`}
           >
