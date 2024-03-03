@@ -6,14 +6,18 @@ import { CurrentDrawer } from "./Drawers";
 import { EditorProvider } from "./Editor";
 import { GraphProvider, graph } from "./Graph";
 import { allNodes } from "./Nodes";
-import { generateEdge, generateNode } from "./nodeGeneration";
+import {generateEdge} from './generateEdge'
 import { positionNodes } from "./positionNodes";
+import { generateNode } from "./generateNode";
+
 
 const edgeTypes = {
   "add-node": AddNodeEdge,
 };
 
 function ReactFlowSandbox() {
+
+
   const {
     nodes,
     edges,
@@ -23,6 +27,8 @@ function ReactFlowSandbox() {
     setNodes,
     setEdges,
   } = useContext(graph);
+
+
 
   const [centeredGraphAtStart, setCenteredGraphAtStart] = useState(false);
   const reactFlowRef = useRef<HTMLDivElement>(null);
@@ -87,8 +93,10 @@ function ReactFlowSandbox() {
 }
 
 export function GraphEditor() {
+  
+
   return (
-    <EditorProvider>
+    <EditorProvider >
       <GraphProvider>
         <ReactFlowSandbox />
       </GraphProvider>

@@ -1,11 +1,7 @@
 import { Handle, NodeProps, Position } from "reactflow";
-
 import { NodeWrapper } from "./NodeWrapper";
+import { EndNodeData } from "./typesEnd";
 
-type EndNodeData = {
-  width: number;
-  height: number;
-};
 
 export function EndNode({ data }: NodeProps<EndNodeData>) {
   return (

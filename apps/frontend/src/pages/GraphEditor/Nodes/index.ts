@@ -21,6 +21,8 @@ export const allNodes = {
   ...userAddableNodes,
 };
 
+console.log(allNodes)
+
 export type NodeName = keyof typeof allNodes;
 
 type NodeConstructorParams<SelectedNodeName extends NodeName> = Parameters<

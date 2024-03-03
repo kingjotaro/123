@@ -1,22 +1,20 @@
 import { DiamondSvg } from "assets/Diamond";
 import { Handle, NodeProps, Position } from "reactflow";
 import { NodeWrapper } from "./NodeWrapper";
+import { ConditionalNodeData } from "./typesConditional";
 
-export type ConditionalNodeData = {
-  label: string;
-  elseLabel?: string;
-  width: number;
-  height: number;
-};
 
 export function ConditionalNode({ data }: NodeProps<ConditionalNodeData>) {
+
+  console.log(data)
+
   return (
     <NodeWrapper>
       <div
         className="w-full h-full group"
         style={{
-          width: data.width,
-          height: data.height,
+          width: 160,
+          height: 100,
         }}
       >
         <div className="p-9 flex items-center justify-center text-[12px] text-center w-full h-full relative">

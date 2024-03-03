@@ -1,37 +1,39 @@
 import { DiamondSvg } from "assets/Diamond";
 import { Drawer } from "components/Drawer";
 import { editor } from "@src/pages/GraphEditor/Editor";
-import { ReactNode, SetStateAction, useContext, useState } from "react";
-
-import { CommonDrawerProps } from "..";
-
+import { SetStateAction, useContext, useState } from "react";
+import ChooseNodeDrawerProps from './typesChooseNode'
 import { graph } from "../../Graph";
 import { UserAddableNodeName } from "../../Nodes";
 import { ChooseNodeButton } from "./ChooseNodeButton";
 
-type ChooseNodeDrawerProps = {
-  sourceNodeId: string;
-  targetNodeId: string;
-  sourceEdgeLabel: ReactNode | null | undefined;
-} & CommonDrawerProps;
 
-export const ChooseNodeDrawer = ({
-  id: edgeToAddNodeAfter,
-}: ChooseNodeDrawerProps) => {
+
+export function ChooseNodeDrawer({ id: edgeToAddNodeAfter, }: ChooseNodeDrawerProps) {
+
+  
   const { drawerVisible, closeEditorDrawer } = useContext(editor);
   const { addNodeAfterEdge, edges } = useContext(graph);
+
 
   const [comparisonType, setComparisonType] = useState("");
   const [greaterValue, setGreaterValue] = useState('');
   const [lowerValue, setLowerValue] = useState('');
 
-  const onButtonClick = (nodeName: UserAddableNodeName) => {
+
+
+  
+
+  function onButtonClick(nodeName: UserAddableNodeName, x: string ) {
+    
     if (edgeToAddNodeAfter !== undefined) {
       const edge = edges.find((edge) => edge.id === edgeToAddNodeAfter)!;
       addNodeAfterEdge({
         nodeName,
         edge,
+        x,
       });
+     
     }
   };
 
@@ -55,7 +57,7 @@ export const ChooseNodeDrawer = ({
                   <DiamondSvg className="h-12 w-20 stroke-4 stroke-Y-350 text-Y-300" />
                 }
                 label="Conditional"
-                onClick={() => onButtonClick("conditional")}
+                onClick={() => onButtonClick("conditional", "sexo")}
 
               />
             </div>
@@ -80,19 +82,19 @@ export const ChooseNodeDrawer = ({
 
               <div className="flex flex-col">
 
-                <input type="number" 
-                className="border border-gray-300 rounded-md p-1" 
-                disabled={comparisonType !== 'greater'} 
-                value={comparisonType === 'greater' ? greaterValue : ''}
-                onChange={handleGreaterInputChange}
+                <input type="number"
+                  className="border border-gray-300 rounded-md p-1"
+                  disabled={comparisonType !== 'greater'}
+                  value={comparisonType === 'greater' ? greaterValue : ''}
+                  onChange={handleGreaterInputChange}
                 />
 
-                <input 
-                type="number" 
-                className="border border-gray-300 rounded-md p-1" 
-                disabled={comparisonType !== 'lower'} 
-                value={comparisonType === 'lower' ? lowerValue : ''}
-                onChange={handleLowerInputChange} />
+                <input
+                  type="number"
+                  className="border border-gray-300 rounded-md p-1"
+                  disabled={comparisonType !== 'lower'}
+                  value={comparisonType === 'lower' ? lowerValue : ''}
+                  onChange={handleLowerInputChange} />
               </div>
 
             </div>

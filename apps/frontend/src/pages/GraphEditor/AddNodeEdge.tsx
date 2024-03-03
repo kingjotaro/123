@@ -1,10 +1,5 @@
 import { useContext } from "react";
-import {
-  BaseEdge,
-  EdgeLabelRenderer,
-  EdgeProps,
-  getSmoothStepPath,
-} from "reactflow";
+import {BaseEdge, EdgeLabelRenderer, EdgeProps, getSmoothStepPath} from "reactflow";
 import { DrawerName, editor } from "./Editor";
 import { PlusCircleIcon } from "@heroicons/react/20/solid";
 

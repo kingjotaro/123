@@ -1,10 +1,8 @@
 import { Handle, NodeProps, Position } from "reactflow";
 import { NodeWrapper } from "./NodeWrapper";
+import { StartNodeData } from "./typesStart";
 
-type StartNodeData = {
-  width: number;
-  height: number;
-};
+
 
 export function StartNode({ data }: NodeProps<StartNodeData>) {
   return (

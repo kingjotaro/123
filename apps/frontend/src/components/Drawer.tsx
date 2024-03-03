@@ -1,14 +1,8 @@
 import { ChevronDoubleRightIcon } from "@heroicons/react/20/solid";
 import { motion } from "framer-motion";
-import { ReactNode, memo } from "react";
+import { memo } from "react";
+import DrawerProps from './typesDrawer'
 
-
-type DrawerProps = {
-  title: string;
-  content: ReactNode;
-  visible: boolean;
-  onClose?: () => void;
-};
 
 // Arbitrary value.
 export const DRAWER_ANIMATION_IN_SECONDS = 0.3;
@@ -20,12 +14,7 @@ export const DRAWER_ANIMATION_IN_MILLISECONDS =
  * @param props Drawer properties: title, content, visible...
  * @returns A customized Drawer component
  */
-const CustomDrawer = ({
-  title,
-  content,
-  onClose,
-  visible,
-}: DrawerProps) => {
+function CustomDrawer({ title, content, onClose, visible, }: DrawerProps) {
   if (!visible) {
     return null;
   }

@@ -17,19 +17,17 @@ import {
   useNodesState,
 } from "reactflow";
 import { editor } from "./Editor";
-import {
-  getNodeDimensions,
-  insertNodeAfterEdge,
-} from "./nodeGeneration";
 import { NodeName } from "./Nodes";
 import { positionNodes } from "./positionNodes";
+import { insertNodeAfterEdge } from "./insertNodeAfterEdge";
+import { getNodeDimensions } from "./getNodeDimensions";
 
 export type Graph = {
   nodes: Node[];
   edges: Edge[];
   setNodes: Dispatch<SetStateAction<Node[]>>;
   setEdges: Dispatch<SetStateAction<Edge[]>>;
-  addNodeAfterEdge: (params: { nodeName: NodeName; edge: Edge }) => void;
+  addNodeAfterEdge: (params: { nodeName: NodeName; edge: Edge, x: string }) => void;
   reactFlowInstance: ReactFlowInstance | null;
   setReactFlowInstance: Dispatch<SetStateAction<ReactFlowInstance | null>>;
   fitZoomToGraph: (reactFlowRef: RefObject<HTMLDivElement>) => void;
@@ -59,7 +57,7 @@ export function GraphProvider({ children }: PropsWithChildren) {
     [setNodes, setEdges]
   );
 
-  const addNodeAfterEdge: Graph["addNodeAfterEdge"] = ({ nodeName, edge }) => {
+  const addNodeAfterEdge: Graph["addNodeAfterEdge"] = ({ nodeName, edge, x }) => {
     if (!edge) {
       return;
     }
@@ -69,6 +67,7 @@ export function GraphProvider({ children }: PropsWithChildren) {
       nodeName,
       nodes,
       edges,
+      x,
     });
 
     closeEditorDrawer();
