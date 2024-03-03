@@ -1,9 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import {
-  Dispatch,
   PropsWithChildren,
   RefObject,
-  SetStateAction,
   createContext,
   useCallback,
   useContext,
@@ -12,32 +10,41 @@ import {
 import {
   Edge,
   Node,
-  ReactFlowInstance,
   useEdgesState,
   useNodesState,
 } from "reactflow";
 import { editor } from "./Editor";
-import { NodeName } from "./Nodes";
 import { positionNodes } from "./positionNodes";
 import { insertNodeAfterEdge } from "./insertNodeAfterEdge";
 import { getNodeDimensions } from "./getNodeDimensions";
+import { Dispatch, SetStateAction } from "react";
+import { ReactFlowInstance } from "reactflow";
+import { NodeName } from "./Nodes";
 
-export type Graph = {
-  nodes: Node[];
-  edges: Edge[];
-  setNodes: Dispatch<SetStateAction<Node[]>>;
-  setEdges: Dispatch<SetStateAction<Edge[]>>;
-  addNodeAfterEdge: (params: { nodeName: NodeName; edge: Edge, x: string }) => void;
-  reactFlowInstance: ReactFlowInstance | null;
-  setReactFlowInstance: Dispatch<SetStateAction<ReactFlowInstance | null>>;
-  fitZoomToGraph: (reactFlowRef: RefObject<HTMLDivElement>) => void;
-};
 
 export const graph = createContext({} as Graph);
 
 // "Big" is arbitrary, and in this context it is used to define if a graph zoom
 // should focus on the entire graph or only at the beginning of it (start block part).
 const arbitraryBigHeight = 1000;
+
+export type Policy = {
+  name: string;
+  value: string;
+  policy: string;
+
+}
+
+export type Graph = {
+  nodes: Node[];
+  edges: Edge[];
+  setNodes: Dispatch<SetStateAction<Node[]>>;
+  setEdges: Dispatch<SetStateAction<Edge[]>>;
+  addNodeAfterEdge: (params: { nodeName: NodeName; edge: Edge, condition: Policy }) => void;
+  reactFlowInstance: ReactFlowInstance | null;
+  setReactFlowInstance: Dispatch<SetStateAction<ReactFlowInstance | null>>;
+  fitZoomToGraph: (reactFlowRef: RefObject<HTMLDivElement>) => void;
+};
 
 export function GraphProvider({ children }: PropsWithChildren) {
   const [reactFlowInstance, setReactFlowInstance] =
@@ -57,7 +64,7 @@ export function GraphProvider({ children }: PropsWithChildren) {
     [setNodes, setEdges]
   );
 
-  const addNodeAfterEdge: Graph["addNodeAfterEdge"] = ({ nodeName, edge, x }) => {
+  const addNodeAfterEdge: Graph["addNodeAfterEdge"] = ({ nodeName, edge, condition }) => {
     if (!edge) {
       return;
     }
@@ -67,7 +74,7 @@ export function GraphProvider({ children }: PropsWithChildren) {
       nodeName,
       nodes,
       edges,
-      x,
+      condition,
     });
 
     closeEditorDrawer();

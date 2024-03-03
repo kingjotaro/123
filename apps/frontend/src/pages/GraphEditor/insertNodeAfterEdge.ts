@@ -2,6 +2,7 @@ import { Edge } from "reactflow";
 import { NodeName, NodeProps } from "./Nodes";
 import { generateEdge } from "./generateEdge";
 import { generateNode } from "./generateNode";
+import { Policy } from "./Graph";
 
 
 /**
@@ -14,13 +15,13 @@ export function insertNodeAfterEdge<SelectedNodeName extends NodeName>({
     nodeName,
     edges,
     nodes,
-    x,
+    condition,
   }: {
     edge: Edge;
     nodeName: SelectedNodeName;
     edges: Edge[];
     nodes: any;
-    x: string;
+    condition: Policy;
   }): { addedNode: NodeProps<SelectedNodeName>; nodes: any; edges: Edge[] } {
     let addedNode = {};
     let returnNodes = null;
@@ -47,7 +48,7 @@ export function insertNodeAfterEdge<SelectedNodeName extends NodeName>({
         const newConditionalNode = generateNode({
           nodeName: "conditional",
           data: {
-            label: `${x}`,
+            label: `${condition.name} ${condition.policy === "greater" ? '>' : '<=' } ${condition.value}`,
           },
         });
   
