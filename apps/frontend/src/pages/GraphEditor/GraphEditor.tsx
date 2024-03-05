@@ -9,6 +9,7 @@ import { allNodes } from "./Nodes";
 import {generateEdge} from './generateEdge'
 import { positionNodes } from "./positionNodes";
 import { generateNode } from "./generateNode";
+import UploadButton from "@src/components/UploadButton";
 
 
 const edgeTypes = {
@@ -73,8 +74,11 @@ function ReactFlowSandbox() {
     setEdges(positionedEdges);
   }, []);
 
+  
   return (
-    <div className="h-full flex flex-col overflow-hidden w-full relative">
+    
+    <div className="h-full flex flex-col overflow-hidden w-full relative"> 
+    <UploadButton/>
       <ReactFlow
         ref={reactFlowRef}
         nodes={nodes}
@@ -84,22 +88,30 @@ function ReactFlowSandbox() {
         onInit={setReactFlowInstance}
         nodesDraggable={false}
         deleteKeyCode={null}
+        
       >
         <Background className="bg-N-75" size={2} color="#C1C4D6" />
       </ReactFlow>
       <CurrentDrawer />
     </div>
+   
   );
 }
 
 export function GraphEditor() {
+
   
+
 
   return (
     <EditorProvider >
+     
       <GraphProvider>
+     
         <ReactFlowSandbox />
+        
       </GraphProvider>
+      
     </EditorProvider>
   );
 }

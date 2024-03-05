@@ -21,7 +21,7 @@ export const allNodes = {
   ...userAddableNodes,
 };
 
-console.log(allNodes)
+
 
 export type NodeName = keyof typeof allNodes;
 

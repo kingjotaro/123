@@ -1,7 +1,7 @@
 import { DiamondSvg } from "assets/Diamond";
 import { Drawer } from "components/Drawer";
 import { editor } from "@src/pages/GraphEditor/Editor";
-import { SetStateAction, useContext, useState } from "react";
+import { SetStateAction, useContext, useEffect, useState } from "react";
 import ChooseNodeDrawerProps from './typesChooseNode'
 import { Policy, graph } from "../../Graph";
 import { UserAddableNodeName } from "../../Nodes";
@@ -13,6 +13,7 @@ import { ChooseNodeButton } from "./ChooseNodeButton";
 export function ChooseNodeDrawer({ id: edgeToAddNodeAfter, }: ChooseNodeDrawerProps) {
 
 
+  
   const { drawerVisible, closeEditorDrawer } = useContext(editor);
   const { addNodeAfterEdge, edges } = useContext(graph);
 
@@ -24,28 +25,26 @@ export function ChooseNodeDrawer({ id: edgeToAddNodeAfter, }: ChooseNodeDrawerPr
 
 
 
-console.log(nameCondition)
-
-
-
   function onButtonClick(nodeName: UserAddableNodeName, condition: Policy) {
 
     if (edgeToAddNodeAfter !== undefined) {
       const edge = edges.find((edge) => edge.id === edgeToAddNodeAfter)!;
+      console.log(edge)
       addNodeAfterEdge({
         nodeName,
         edge,
         condition,
       });
-      console.log(edge)
+ 
     }
   };
+ 
 
   const handleGreaterInputChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setGreaterValue(e.target.value);
   };
 
-  console.log(comparisonType)
+ 
   const handleLowerInputChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setLowerValue(e.target.value);
   };
@@ -69,16 +68,24 @@ console.log(nameCondition)
                   <DiamondSvg className="h-12 w-20 stroke-4 stroke-Y-350 text-Y-300" />
                 }
                 label="Conditional"
-                onClick={() => onButtonClick("conditional", {
-                  name: nameCondition,
-                  value: comparisonType === "greater" ? greaterValue : lowerValue,
-                  policy: comparisonType
-                })}
+                onClick={() => {
+                  onButtonClick(
+                      "conditional", 
+                      {
+                          name: nameCondition,
+                          value: comparisonType === "greater" ? greaterValue : lowerValue,
+                          policy: comparisonType
+
+                      }
+                  );
+                  
+              }}
 
               />
             </div>
             <div >
 
+         
 
               <div className="flex fle-row gap-5 mt-5">
 

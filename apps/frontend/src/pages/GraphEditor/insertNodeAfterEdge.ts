@@ -4,7 +4,6 @@ import { generateEdge } from "./generateEdge";
 import { generateNode } from "./generateNode";
 import { Policy } from "./Graph";
 
-
 /**
  * Returns the width and height of the node based on its type.
  */
@@ -26,6 +25,8 @@ export function insertNodeAfterEdge<SelectedNodeName extends NodeName>({
     let addedNode = {};
     let returnNodes = null;
     let returnEdges = null;
+
+    
   
     switch (nodeName) {
       // End nodes can't be added by Users, so they are never placed between two
@@ -50,6 +51,8 @@ export function insertNodeAfterEdge<SelectedNodeName extends NodeName>({
           data: {
             label: `${condition.name} ${condition.policy === "greater" ? '>' : '<=' } ${condition.value}`,
           },
+          
+
         });
   
         const newEndNodes = {
@@ -62,29 +65,42 @@ export function insertNodeAfterEdge<SelectedNodeName extends NodeName>({
             target: newEndNodes.branch.id,
             label: "True",
           }),
+          
           generateEdge({
             source: newConditionalNode.id,
             target: edge.target,
             label: "False",
           }),
+          
         ];
-  
+       
         const updatedExistingEdges = edges.map((e) => {
           if (e.id === edge.id) {
             return { ...e, target: newConditionalNode.id };
           }
           return e;
         });
+
+
   
         const newNodes = [newEndNodes.branch, newConditionalNode];
         addedNode = newConditionalNode;
         returnNodes = [...nodes, ...newNodes];
         returnEdges = [...updatedExistingEdges, ...newEdges];
+
+
+        
+        
         break;
       }
+
+      
     }
+
+        
   
     return {
+      
       addedNode: addedNode as NodeProps<SelectedNodeName>,
       nodes: returnNodes as Node[],
       edges: returnEdges as Edge[],

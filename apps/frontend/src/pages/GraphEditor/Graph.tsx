@@ -22,6 +22,7 @@ import { ReactFlowInstance } from "reactflow";
 import { NodeName } from "./Nodes";
 
 
+
 export const graph = createContext({} as Graph);
 
 // "Big" is arbitrary, and in this context it is used to define if a graph zoom
@@ -47,6 +48,10 @@ export type Graph = {
 };
 
 export function GraphProvider({ children }: PropsWithChildren) {
+
+
+
+
   const [reactFlowInstance, setReactFlowInstance] =
     useState<Graph["reactFlowInstance"]>(null);
   const [nodes, setNodes] = useNodesState([]);
@@ -116,7 +121,12 @@ export function GraphProvider({ children }: PropsWithChildren) {
     });
   }
 
+  console.log(edges)
+  console.log(nodes)
+
+
   return (
+     
     <graph.Provider
       value={{
         nodes,
@@ -131,5 +141,6 @@ export function GraphProvider({ children }: PropsWithChildren) {
     >
       {children}
     </graph.Provider>
+    
   );
 }

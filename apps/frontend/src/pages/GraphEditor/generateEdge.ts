@@ -1,19 +1,11 @@
-import { nanoid } from "nanoid";
 import { Edge, MarkerType } from "reactflow";
+import { generateUniqueNodeId } from "./generateUniqueNodeId";
 
 export type PrefilledEdgeFields = "id" | "type" | "markerEnd";
 export type EditableEdge = Omit<Edge, PrefilledEdgeFields>;
 
 
-/**
- * Generates a node object with the type and data passed.
- * @returns Node
- */
 
-export function generateUniqueNodeId() {
-  const arbitraryButShortIdLength = 10;
-  return nanoid(arbitraryButShortIdLength);
-}
 
 
 export function generateEdge(params: EditableEdge): Edge {

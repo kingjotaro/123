@@ -25,9 +25,12 @@ export function generateNode<SelectedNodeName extends NodeName>({
     id?: SelectedNodeName extends "start" ? string : never;
   }): Node<NodeData<SelectedNodeName>> {
     const willBePositionedLater = { x: 0, y: 0 };
+
+   let x = id ?? generateUniqueNodeId()
+    
   
     return {
-      id: id ?? generateUniqueNodeId(),
+      id: x,
       type: nodeName,
       position: willBePositionedLater,
       data: {

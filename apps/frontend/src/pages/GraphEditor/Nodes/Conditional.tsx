@@ -6,7 +6,7 @@ import { ConditionalNodeData } from "./typesConditional";
 
 export function ConditionalNode({ data }: NodeProps<ConditionalNodeData>) {
 
-  console.log(data)
+  
 
   return (
     <NodeWrapper>
