@@ -78,7 +78,9 @@ function ReactFlowSandbox() {
   return (
     
     <div className="h-full flex flex-col overflow-hidden w-full relative"> 
-    <UploadButton/>
+    <UploadButton>
+
+    </UploadButton>
       <ReactFlow
         ref={reactFlowRef}
         nodes={nodes}

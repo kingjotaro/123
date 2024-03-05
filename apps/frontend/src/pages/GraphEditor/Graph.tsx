@@ -121,8 +121,7 @@ export function GraphProvider({ children }: PropsWithChildren) {
     });
   }
 
-  console.log(edges)
-  console.log(nodes)
+
 
 
   return (
