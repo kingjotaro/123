@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { DRAWER_ANIMATION_IN_MILLISECONDS } from "components/Drawer";
 import { PropsWithChildren, createContext, useState } from "react";
-import { CommonDrawerProps, drawers } from "./Drawers";
+import { drawers } from "./Drawers";
 
 export enum DrawerName {
   newNode,
@@ -19,8 +19,7 @@ export type Editor = {
      * The type below automatically suggests the correct props for the chosen Drawer name.
      * If the Drawer has no specific props, it uses only the Common ones.
      */
-    props: Parameters<(typeof drawers)[T]>[0] | CommonDrawerProps
-  ) => void;
+    props: Parameters<(typeof drawers)[T]>[0]  ) => void;
 };
 
 export const editor = createContext({} as Editor);

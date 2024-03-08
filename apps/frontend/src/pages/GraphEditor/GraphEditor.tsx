@@ -10,6 +10,7 @@ import {generateEdge} from './generateEdge'
 import { positionNodes } from "./positionNodes";
 import { generateNode } from "./generateNode";
 import UploadButton from "@src/components/UploadButton";
+import DownloadButton from "@src/components/DownloadButton";
 
 
 const edgeTypes = {
@@ -72,7 +73,10 @@ function ReactFlowSandbox() {
     );
     setNodes(positionedNodes);
     setEdges(positionedEdges);
+    
   }, []);
+
+  
 
   
   return (
@@ -81,6 +85,7 @@ function ReactFlowSandbox() {
     <UploadButton>
 
     </UploadButton>
+    <DownloadButton></DownloadButton>
       <ReactFlow
         ref={reactFlowRef}
         nodes={nodes}

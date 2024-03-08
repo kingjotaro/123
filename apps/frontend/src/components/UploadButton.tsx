@@ -4,7 +4,7 @@ import { useContext } from "react";
 import postData from "@src/pages/GraphEditor/API/post";
 
 function UploadButton() {
-  const { nodes ,edges } = useContext(graph);
+  const { nodes, edges} = useContext(graph);
   const [name, setName] = useState(""); // Adicione o estado para o nome
 
   async function handleUpload() {
