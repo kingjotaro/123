@@ -1,7 +1,7 @@
 import { DiamondSvg } from "assets/Diamond";
 import { Drawer } from "components/Drawer";
 import { editor } from "@src/pages/GraphEditor/Editor";
-import { SetStateAction, useContext, useEffect, useState } from "react";
+import { SetStateAction, useContext, useState } from "react";
 import ChooseNodeDrawerProps from './typesChooseNode'
 import { Policy, graph } from "../../Graph";
 import { UserAddableNodeName } from "../../Nodes";
@@ -29,7 +29,7 @@ export function ChooseNodeDrawer({ id: edgeToAddNodeAfter, }: ChooseNodeDrawerPr
 
     if (edgeToAddNodeAfter !== undefined) {
       const edge = edges.find((edge) => edge.id === edgeToAddNodeAfter)!;
-      console.log(edge)
+     
       addNodeAfterEdge({
         nodeName,
         edge,
