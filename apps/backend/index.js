@@ -4,6 +4,8 @@ import post from './post.js'
 import cors from "koa2-cors";
 import bodyParser from 'koa-bodyparser';
 import Router from 'koa-router';
+import get from './get.js'
+import getall from './getall.js'
 
 mongoose.connect('mongodb+srv://rafaelleet:a9n7w9d4@vum-c0.enxoa6a.mongodb.net/?retryWrites=true&w=majority&appName=Vum-c0/', {
 
@@ -27,6 +29,8 @@ app.use(
     })
 );
 
+app.use(getall.routes());
+app.use(get.routes());
 app.use(post.routes());
 app.use(router.allowedMethods());
 
