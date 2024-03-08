@@ -1,19 +1,14 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import getAll from "@src/pages/GraphEditor/API/getall";
 import { Graph, graph } from '@src/pages/GraphEditor/Graph';
 
 interface ObjectData {
   _id: string;
   name: string;
-  
 }
 
 function DownloadButton() {
-
   const { setNodes, setEdges } = useContext(graph);
-
-
-
   const [objects, setObjects] = useState<ObjectData[]>([]);
   const [showList, setShowList] = useState(false);
   const [selectedObjectName, setSelectedObjectName] = useState('');
@@ -37,23 +32,22 @@ function DownloadButton() {
     setShowList(!showList);
   }
 
-  async function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
+  function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const selectedName = event.target.value;
     setSelectedObjectName(selectedName);
     const selectedObj = objects.find(obj => obj.name === selectedName);
     setSelectedObject(selectedObj || null);
-
-
   }
 
-
-  if (selectedObject) {
-    const { nodes, edges } = selectedObject as unknown as Graph;
-    setEdges(edges)
-    setNodes(nodes)
-    console.log(nodes);
-    console.log(edges);
-  }
+  useEffect(() => {
+    if (selectedObject) {
+      const { nodes, edges } = selectedObject as unknown as Graph;
+      setEdges(edges)
+      setNodes(nodes)
+      console.log(nodes);
+      console.log(edges);
+    }
+  }, [selectedObject, setEdges, setNodes]);
 
   return (
     <div>
