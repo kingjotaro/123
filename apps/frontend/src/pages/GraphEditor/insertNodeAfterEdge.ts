@@ -46,14 +46,37 @@ export function insertNodeAfterEdge<SelectedNodeName extends NodeName>({
         break;
       }
       case "conditional": {
+        let comparisonSymbol = '';
+      
+        switch (condition.policy) {
+          case "greater":
+            comparisonSymbol = '>';
+            break;
+          case "greaterEqual":
+            comparisonSymbol = '>=';
+            break;
+          case "lower":
+            comparisonSymbol = '<';
+            break;
+          case "lowerEqual":
+            comparisonSymbol = '<=';
+            break;
+          case "Equal":
+            comparisonSymbol = '==';
+            break;
+          default:
+            comparisonSymbol = ''; 
+            break;
+        }
+      
         const newConditionalNode = generateNode({
           nodeName: "conditional",
           data: {
-            label: `${condition.name} ${condition.policy === "greater" ? '>' : '<=' } ${condition.value}`,
-          },
-          
-
+            label: `${condition.name} ${comparisonSymbol} ${condition.value}`
+          }
         });
+      
+      
   
         const newEndNodes = {
           branch: generateNode({ nodeName: "end" }),
