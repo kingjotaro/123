@@ -75,16 +75,6 @@ function Conditions({
             <label htmlFor="Equal" className="text-md"> Equal </label>
           </div>
 
-
-
-
-
-
-
-
-
-
-
           <div className="flex flex-row items-center justify-center space-x-2 mt-7">
             Condition Name
           </div>

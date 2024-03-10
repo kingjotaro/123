@@ -1,7 +1,7 @@
 import { Node } from "reactflow";
-import { generateUniqueNodeId } from "./generateUniqueNodeId";
+import { generateUniqueNodeId } from "./GenerateUniqueNodeId";
 import { NodeData, NodeName } from "./Nodes";
-import { getNodeDimensions } from "./getNodeDimensions";
+import { getNodeDimensions } from "./GetNodeDimensions";
 
 export type PrefilledNodeDataFields = "width" | "height";
 

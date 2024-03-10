@@ -1,5 +1,5 @@
 import { Edge, MarkerType } from "reactflow";
-import { generateUniqueNodeId } from "./generateUniqueNodeId";
+import { generateUniqueNodeId } from "./GenerateUniqueNodeId";
 
 export type PrefilledEdgeFields = "id" | "type" | "markerEnd";
 export type EditableEdge = Omit<Edge, PrefilledEdgeFields>;

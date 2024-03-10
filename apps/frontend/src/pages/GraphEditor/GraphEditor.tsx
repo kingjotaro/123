@@ -6,9 +6,9 @@ import { CurrentDrawer } from "./Drawers";
 import { EditorProvider } from "./Editor";
 import { GraphProvider, graph } from "./Graph";
 import { allNodes } from "./Nodes";
-import {generateEdge} from './generateEdge'
-import { positionNodes } from "./positionNodes";
-import { generateNode } from "./generateNode";
+import {generateEdge} from './GenerateEdge'
+import { positionNodes } from "./PositionNodes";
+import { generateNode } from "./GenerateNode";
 import UploadButton from "@src/components/UploadButton";
 import DownloadButton from "@src/components/DownloadButton";
 

@@ -14,9 +14,9 @@ import {
   useNodesState,
 } from "reactflow";
 import { editor } from "./Editor";
-import { positionNodes } from "./positionNodes";
-import { insertNodeAfterEdge } from "./insertNodeAfterEdge";
-import { getNodeDimensions } from "./getNodeDimensions";
+import { positionNodes } from "./PositionNodes";
+import { insertNodeAfterEdge } from "./InsertNodeAfterEdge";
+import { getNodeDimensions } from "./GetNodeDimensions";
 import { Dispatch, SetStateAction } from "react";
 import { ReactFlowInstance } from "reactflow";
 import { NodeName } from "./Nodes";

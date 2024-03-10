@@ -1,7 +1,7 @@
 import { Edge } from "reactflow";
 import { NodeName, NodeProps } from "./Nodes";
-import { generateEdge } from "./generateEdge";
-import { generateNode } from "./generateNode";
+import { generateEdge } from "./GenerateEdge";
+import { generateNode } from "./GenerateNode";
 import { Policy } from "./Graph";
 
 /**
