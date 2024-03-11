@@ -37,17 +37,28 @@ This repository utilizes Turbo Build to automate the process of building, testin
     git clone https://github.com/kingjotaro/123
     ```
 
-2. **Install Turbo locally:**
+2. **Get into repository source:** 
 
     ```
-    npm install -g @turbo/build
+    cd 123
     ```
 
-3. **Execute Turbo Dev:**
+3. **Install all dependencies:**
 
     ```
-    npm turbo dev
+    npm install
     ```
+
+4. **Create .env file with MONGO_URI:** 
+
+   Create a `.env` file with your `MONGO_URI` to connect to your data on the backend repository.
+
+5. **Execute Turbo Dev:**
+
+    ```
+    npm run dev
+    ```
+
 
 For more information, refer to the [official Turbo documentation](https://turbo.build/docs).
 
