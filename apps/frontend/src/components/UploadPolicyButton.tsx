@@ -1,22 +1,35 @@
-import { SetStateAction, useState } from 'react'; // Importe o useState
+import { SetStateAction, useState } from 'react'; 
 import { graph } from "@src/pages/GraphEditor/Graph";
 import { useContext } from "react";
 import postData from '@src/pages/GraphEditor/API/Post';
 
+
+
 function UploadPolicyButton() {
   const { nodes, edges} = useContext(graph);
-  const [name, setName] = useState(""); // Adicione o estado para o nome
+ 
+  const [error, setError] = useState('');
+  const [name, setName] = useState('')
 
+  
   async function handleUpload() {
     try {
+      if (!name.trim()) {
+       
+        setError('Need a policy name');
+
+
+        return 
+      }
       const responseData = await postData({ name, nodes, edges });
-      console.log('Dados enviados com sucesso:', responseData);
+      console.log('Data send:', responseData);
     } catch (error) {
-      console.error('Erro ao enviar os dados:', error);
+      
+      console.error('Error not send', error);
     }
   }
 
-  // Função para lidar com a alteração do input de texto
+
   function handleNameChange(event: { target: { value: SetStateAction<string>; }; }) {
     setName(event.target.value);
   }
@@ -27,9 +40,10 @@ function UploadPolicyButton() {
         type="text"
         value={name}
         onChange={handleNameChange}
-        placeholder="Policy name"
+
+        placeholder={error == '' ? "Policy name" : error }
       />
-      <button className='bg-gray-300 hover:bg-teal-300 text-gray-800 font-bold border border-black  px-2 rounded' onClick={handleUpload}>Save</button>
+      <button className='bg-gray-300 hover:bg-teal-300 text-gray-800 font-bold border border-black px-2 rounded' onClick={handleUpload}>Save</button>
     </div>
   );
 }

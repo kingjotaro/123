@@ -1,5 +1,5 @@
 import "reactflow/dist/style.css";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { SetStateAction, useCallback, useContext, useEffect, useRef, useState } from "react";
 import ReactFlow, { Background } from "reactflow";
 import { AddNodeEdge } from "./AddNodeEdge";
 import { CurrentDrawer } from "./Drawers";
@@ -12,6 +12,7 @@ import { generateNode } from "./GenerateNode";
 
 import DownloadAllPolicyButton from "@src/components/DownloadAllPolicyButton";
 import UploadPolicyButton from "@src/components/UploadPolicyButton";
+import TestButton from "@src/components/TestButton";
 
 
 const edgeTypes = {
@@ -31,8 +32,8 @@ function ReactFlowSandbox() {
     setEdges,
   } = useContext(graph);
 
-
-
+  const [selectedObjectName, setSelectedObjectName] = useState('');
+  
   const [centeredGraphAtStart, setCenteredGraphAtStart] = useState(false);
   const reactFlowRef = useRef<HTMLDivElement>(null);
 
@@ -82,12 +83,15 @@ function ReactFlowSandbox() {
   
   return (
     
-    <div className="h-full flex flex-col overflow-hidden w-full relative"> 
-    <div className="flex flex-col items-center ">
+    <div className="h-full flex flex-row overflow-hidden w-full relative"> 
+    
+    <div className="flex flex-col items-center p-2">
    
-    <DownloadAllPolicyButton/>
+    <DownloadAllPolicyButton selectedObjectName={selectedObjectName} setSelectedObjectName={setSelectedObjectName}></DownloadAllPolicyButton>
     <UploadPolicyButton/>
+    <TestButton selectedObjectName={selectedObjectName} setSelectedObjectName={setSelectedObjectName}></TestButton>
     </div>
+    
       <ReactFlow
         ref={reactFlowRef}
         nodes={nodes}

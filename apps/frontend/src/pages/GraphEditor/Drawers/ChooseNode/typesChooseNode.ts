@@ -17,14 +17,14 @@ export interface ConditionsProps {
   setComparisonType: React.Dispatch<SetStateAction<string>>;
   greaterValue: string;
   setGreaterValue: React.Dispatch<SetStateAction<string>>;
-  greaterOrEqualValue: string; // Adicionado
-  setGreaterOrEqualValue: React.Dispatch<SetStateAction<string>>; // Adicionado
+  greaterOrEqualValue: string; 
+  setGreaterOrEqualValue: React.Dispatch<SetStateAction<string>>; 
   lowerValue: string;
   setLowerValue: React.Dispatch<SetStateAction<string>>;
-  lowerOrEqualValue: string; // Adicionado
-  setLowerOrEqualValue: React.Dispatch<SetStateAction<string>>; // Adicionado
-  equalValue: string; // Adicionado
-  setEqualValue: React.Dispatch<SetStateAction<string>>; // Adicionado
+  lowerOrEqualValue: string;
+  setLowerOrEqualValue: React.Dispatch<SetStateAction<string>>;
+  equalValue: string; 
+  setEqualValue: React.Dispatch<SetStateAction<string>>; 
   nameCondition: string;
   setNameCondition: React.Dispatch<SetStateAction<string>>;
 }

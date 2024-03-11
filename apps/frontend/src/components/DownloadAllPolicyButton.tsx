@@ -7,11 +7,16 @@ interface ObjectData {
   name: string;
 }
 
-function DownloadAllPolicyButton() {
+export interface propsName {
+  selectedObjectName: string;
+  setSelectedObjectName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function DownloadAllPolicyButton({selectedObjectName, setSelectedObjectName}: propsName) {
   const { setNodes, setEdges } = useContext(graph);
   const [objects, setObjects] = useState<ObjectData[]>([]);
   const [showList, setShowList] = useState(false);
-  const [selectedObjectName, setSelectedObjectName] = useState('');
+
   const [selectedObject, setSelectedObject] = useState<ObjectData | null>(null);
 
   useEffect(() => {
