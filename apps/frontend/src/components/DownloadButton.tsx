@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import getAll from "@src/pages/GraphEditor/API/getall";
+import getAll from "@src/pages/GraphEditor/API/GetAll";
 import { Graph, graph } from '@src/pages/GraphEditor/Graph';
 
 interface ObjectData {

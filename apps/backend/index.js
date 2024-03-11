@@ -1,11 +1,12 @@
 import Koa from 'koa';
 import mongoose from 'mongoose';
-import post from './post.js'
+import post from './Post.js'
 import cors from "koa2-cors";
 import bodyParser from 'koa-bodyparser';
 import Router from 'koa-router';
-import get from './get.js'
-import getall from './getall.js'
+import get from './Get.js'
+import getall from './GetAll.js'
+import execution from './ExecutionEngine.js'
 
 mongoose.connect('mongodb+srv://rafaelleet:a9n7w9d4@vum-c0.enxoa6a.mongodb.net/?retryWrites=true&w=majority&appName=Vum-c0/', {
 
@@ -28,7 +29,7 @@ app.use(
         allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
-
+app.use(execution.routes());
 app.use(getall.routes());
 app.use(get.routes());
 app.use(post.routes());

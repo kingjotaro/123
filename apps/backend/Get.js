@@ -1,5 +1,7 @@
 import Router from 'koa-router';
-import Drawer from './schema.js'; 
+import Drawer from './Schema.js';
+
+
 const router = new Router();
 
 router.get('/get', async (ctx) => {
@@ -8,21 +10,22 @@ router.get('/get', async (ctx) => {
 
         if (!name) {
             ctx.status = 400;
-            ctx.body = { error: 'Nome não fornecido na consulta' };
+            ctx.body = { error: 'Name not provided in the query' };
             return;
         }
-
         const drawerDoc = await Drawer.findOne({ name });
 
         if (!drawerDoc) {
+
             ctx.status = 404;
-            ctx.body = { error: 'Gaveta não encontrada' };
+            ctx.body = { error: 'Drawer not found' };
             return;
         }
 
         ctx.status = 200;
         ctx.body = drawerDoc;
     } catch (error) {
+
         ctx.status = 500;
         ctx.body = { error: error.message };
     }

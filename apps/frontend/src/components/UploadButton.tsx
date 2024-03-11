@@ -1,7 +1,7 @@
 import { SetStateAction, useState } from 'react'; // Importe o useState
 import { graph } from "@src/pages/GraphEditor/Graph";
 import { useContext } from "react";
-import postData from "@src/pages/GraphEditor/API/post";
+import postData from '@src/pages/GraphEditor/API/Post';
 
 function UploadButton() {
   const { nodes, edges} = useContext(graph);

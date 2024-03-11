@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import Drawer from './schema.js';
+import Drawer from './Schema.js';
 
 const router = new Router();
 
