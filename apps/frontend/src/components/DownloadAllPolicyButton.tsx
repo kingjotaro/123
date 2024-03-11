@@ -7,7 +7,7 @@ interface ObjectData {
   name: string;
 }
 
-function DownloadButton() {
+function DownloadAllPolicyButton() {
   const { setNodes, setEdges } = useContext(graph);
   const [objects, setObjects] = useState<ObjectData[]>([]);
   const [showList, setShowList] = useState(false);
@@ -50,17 +50,17 @@ function DownloadButton() {
   }, [selectedObject, setEdges, setNodes]);
 
   return (
-    <div>
-      <button onClick={refresh}>Refresh list</button>
-      <button onClick={toggleList}>Show list</button>
-
+    <div className='mt-1'>
+      <div className='flex flex-row gap-5'>
+      <button className='bg-gray-300 hover:bg-teal-300 text-gray-800 font-bold border border-black  px-2 rounded' onClick={refresh}>Refresh list</button>
+      <button className='bg-gray-300 hover:bg-teal-300 text-gray-800 font-bold border border-black  px-2 rounded' onClick={toggleList}>Show list</button>
+      </div>
       {showList && (
-        <div>
-          <label htmlFor="objectSelect">Select an object:</label>
-          <select id="objectSelect" onChange={handleSelectChange} value={selectedObjectName}>
-            <option value="">Select an object</option>
+        <div className='flex flex-row gap-1 mt-1'>
+          <label className='text-gray-800 font-bold' htmlFor="objectSelect">Select an Policy:</label>
+          <select className='border border-black rounded' onChange={handleSelectChange} value={selectedObjectName}>
             {objects.map(obj => (
-              <option key={obj._id} value={obj.name}>{obj.name}</option>
+              <option className='bg-gray-300 border' key={obj._id} value={obj.name}>{obj.name}</option>
             ))}
           </select>
         </div>
@@ -69,4 +69,4 @@ function DownloadButton() {
   );
 }
 
-export default DownloadButton;
+export default DownloadAllPolicyButton;

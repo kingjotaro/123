@@ -9,8 +9,9 @@ import { allNodes } from "./Nodes";
 import {generateEdge} from './GenerateEdge'
 import { positionNodes } from "./PositionNodes";
 import { generateNode } from "./GenerateNode";
-import UploadButton from "@src/components/UploadButton";
-import DownloadButton from "@src/components/DownloadButton";
+
+import DownloadAllPolicyButton from "@src/components/DownloadAllPolicyButton";
+import UploadPolicyButton from "@src/components/UploadPolicyButton";
 
 
 const edgeTypes = {
@@ -82,10 +83,11 @@ function ReactFlowSandbox() {
   return (
     
     <div className="h-full flex flex-col overflow-hidden w-full relative"> 
-    <UploadButton>
-
-    </UploadButton>
-    <DownloadButton></DownloadButton>
+    <div className="flex flex-col items-center ">
+   
+    <DownloadAllPolicyButton/>
+    <UploadPolicyButton/>
+    </div>
       <ReactFlow
         ref={reactFlowRef}
         nodes={nodes}
