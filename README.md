@@ -1,1 +1,53 @@
-See [instructions.md](instructions.md), then later add your docs to this file.
+# Turbo Repo
+
+This repository utilizes Turbo Build to automate the process of building, testing, linting, and deploying.
+
+## Technologies Used
+
+### Front-end
+
+- **React**: JavaScript library for building user interfaces.
+- **React Router DOM**: Declarative and component-based navigation for React.
+- **ReactFlow**: Library for building interactive flow diagrams.
+
+### Back-end
+
+- **Koa**: Web framework for Node.js aiming to be a smaller, more expressive foundation for web applications and APIs.
+- **MongoDB**: NoSQL database.
+- **Mongoose**: Object-Document Mapping (ODM) for MongoDB.
+- **dotenv**: Loads environment variables from .env files.
+- **koa-bodyparser**: Middleware for Koa that parses request bodies.
+- **koa-router**: Middleware for routing in Koa.
+- **koa2-cors**: Middleware for Koa to enable Cross-Origin Resource Sharing (CORS).
+- **node-fetch**: Module providing an interface for making HTTP requests.
+- **router**: Routing library for Node.js.
+
+## Project Configuration
+
+- **turbo.json**: Defines the build pipeline.
+- **package.json (front-end)**: Specific configurations for the front-end.
+- **package.json (backend)**: Specific configurations for the back-end.
+- **package.json (dev-1)**: General project configurations.
+
+## Running the Project
+
+1. **Clone the repository:**
+
+    ```
+    git clone https://github.com/kingjotaro/123
+    ```
+
+2. **Install Turbo locally:**
+
+    ```
+    npm install -g @turbo/build
+    ```
+
+3. **Execute Turbo Dev:**
+
+    ```
+    npm turbo dev
+    ```
+
+For more information, refer to the [official Turbo documentation](https://turbo.build/docs).
+

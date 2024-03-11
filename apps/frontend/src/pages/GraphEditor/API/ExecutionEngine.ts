@@ -1,5 +1,5 @@
-export default async function postData(data) {
-    const url = "http://localhost:3000/post";
+export default async function ExecutionEngine(name: string, data: { [key: string]: string; }) {
+    const url = "http://localhost:3000/execution/" + name;
   
     try {
       const requestOptions = {
@@ -7,16 +7,19 @@ export default async function postData(data) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       };
-    
+  
       const response = await fetch(url, requestOptions);
-    
+  
       if (!response.ok) {
         throw new Error('Error');
       }
   
-      return await response.json();
+      const responseData = await response.json(); 
+  
+      console.log(responseData); 
+      return responseData; 
     } catch (error) {
-      throw new Error('Erro ao processar a requisição:', error);
+      throw new Error('Error:' + error);
     }
   }
   

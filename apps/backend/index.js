@@ -7,8 +7,13 @@ import Router from 'koa-router';
 import get from './Get.js'
 import getall from './GetAll.js'
 import execution from './ExecutionEngine.js'
+import dotenv from "dotenv";
 
-mongoose.connect('mongodb+srv://rafaelleet:a9n7w9d4@vum-c0.enxoa6a.mongodb.net/?retryWrites=true&w=majority&appName=Vum-c0/', {
+dotenv.config();
+
+
+
+mongoose.connect(process.env.MONGO_URI, {
 
 })
     .then(() => console.log('MongoDB Conected'))
@@ -25,7 +30,7 @@ app.use(
     cors({
         origin: "http://localhost:5173",
         credentials: true,
-        methods: ["GET", "POST", "PUT", "DELETE"],
+        methods: ["GET", "POST"],
         allowedHeaders: ["Content-Type", "Authorization"],
     })
 );

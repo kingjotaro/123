@@ -1,5 +1,7 @@
-export default async function ExecutionEngine(name, data) {
-    const url = "http://localhost:3000/execution/" + name;
+import { Node, Edge } from "reactflow";
+
+export default async function postData(data: { name: string; nodes: Node[]; edges: Edge[]; }) {
+    const url = "http://localhost:3000/post";
   
     try {
       const requestOptions = {
@@ -7,19 +9,16 @@ export default async function ExecutionEngine(name, data) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       };
-  
+    
       const response = await fetch(url, requestOptions);
-  
+    
       if (!response.ok) {
         throw new Error('Error');
       }
   
-      const responseData = await response.json(); 
-  
-      console.log(responseData); 
-      return responseData; 
+      return await response.json();
     } catch (error) {
-      throw new Error('Erro ao processar a requisição:', error);
+      throw new Error('Error:'+ error);
     }
   }
   

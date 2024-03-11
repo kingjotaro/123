@@ -16,7 +16,7 @@ router.post('/execution/:param', async (ctx) => {
     
         if (!param) {
             ctx.status = 400;
-            ctx.body = { error: 'Parâmetro não fornecido na consulta' };
+            ctx.body = { error: 'Missing Parameters' };
             return;
         }
  
@@ -25,7 +25,7 @@ router.post('/execution/:param', async (ctx) => {
         const response = await fetch(url);
         
         if (!response.ok) {
-            throw new Error('Falha ao buscar os dados');
+            throw new Error('Error on fetch data');
         }
 
         const responseData = await response.json(); 

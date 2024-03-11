@@ -9,7 +9,7 @@ router.get('/getall', async (ctx) => {
 
         if (!drawerDocs || drawerDocs.length === 0) { 
             ctx.status = 404;
-            ctx.body = { error: 'No data' };
+            ctx.body = { error: 'Data not found' };
             return;
         }
 
