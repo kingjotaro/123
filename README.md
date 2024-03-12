@@ -21,6 +21,7 @@ This repository utilizes Turbo Build to automate the process of building, testin
 - **koa2-cors**: Middleware for Koa to enable Cross-Origin Resource Sharing (CORS).
 - **node-fetch**: Module providing an interface for making HTTP requests.
 - **router**: Routing library for Node.js.
+- **jest**: Testing Library
 
 ## Project Configuration
 

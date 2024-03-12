@@ -1,7 +1,6 @@
-import Router from "koa-router"
+import Router from "koa-router";
 import Drawer from './Schema';
 import { ParameterizedContext } from 'koa';
-
 
 const router = new Router();
 
@@ -11,25 +10,23 @@ router.get('/get', async (ctx: ParameterizedContext) => {
 
         if (!name) {
             ctx.status = 400;
-            ctx.body = { error: 'Name not provided in the query' };
+            ctx.body = { error: 'Name parameter is missing in the query string' };
             return;
         }
+
         const drawerDoc = await Drawer.findOne({ name });
 
         if (!drawerDoc) {
-
             ctx.status = 404;
-            ctx.body = { error: 'Drawer not found' };
+            ctx.body = { error: 'Drawer not found for the provided name' };
             return;
         }
 
-        
+        ctx.status = 200;
         ctx.body = drawerDoc;
-        return ctx.status = 200;
     } catch (error) {
-
         ctx.status = 500;
-        ctx.body = { error};
+        ctx.body = { error: 'Internal server error' };
     }
 });
 

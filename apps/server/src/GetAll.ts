@@ -1,4 +1,4 @@
-import Router from "koa-router"
+import Router from "koa-router";
 import Drawer from './Schema';
 
 const router = new Router();
@@ -9,18 +9,15 @@ router.get('/getall', async (ctx) => {
 
         if (!drawerDocs || drawerDocs.length === 0) { 
             ctx.status = 404;
-            ctx.body = { error: 'Data not found' };
+            ctx.body = { error: 'No data found in the database' };
             return;
         }
 
-        
-        console.log(ctx.status)
+        ctx.status = 200;
         ctx.body = drawerDocs;
-
-        return ctx.status = 200;
     } catch (error) {
         ctx.status = 500;
-        ctx.body = { error};
+        ctx.body = { error: 'Internal server error' };
     }
 });
 
