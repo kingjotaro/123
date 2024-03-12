@@ -51,7 +51,7 @@ This repository utilizes Turbo Build to automate the process of building, testin
 
 4. **Create .env file with MONGO_URI:** 
 
-   Create a `.env` file with your `MONGO_URI` to connect to your data on the backend repository.
+   Create a `.env` file with your `MONGO_URI` to connect to your data on the backend repository root.
 
 5. **Execute Turbo Dev:**
 

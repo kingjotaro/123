@@ -1,10 +1,11 @@
-import Router from 'koa-router';
-import Drawer from './Schema.js';
+import Router from "koa-router"
+import Drawer from './Schema';
+import { ParameterizedContext } from 'koa';
 
 
 const router = new Router();
 
-router.get('/get', async (ctx) => {
+router.get('/get', async (ctx: ParameterizedContext) => {
     try {
         const { name } = ctx.query;
 
@@ -27,7 +28,7 @@ router.get('/get', async (ctx) => {
     } catch (error) {
 
         ctx.status = 500;
-        ctx.body = { error: error.message };
+        ctx.body = { error};
     }
 });
 

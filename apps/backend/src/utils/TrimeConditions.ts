@@ -1,5 +1,5 @@
-export default function trimeConditions(stringArray) {
-    const results = [];
+export default function TrimeConditions(stringArray: string[]): { name: string, operator: string, value: string }[] {
+    const results: { name: string, operator: string, value: string }[] = [];
 
     if (!Array.isArray(stringArray)) {
         throw new Error('The provided argument is not an array.');

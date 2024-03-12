@@ -1,4 +1,4 @@
-export default function applyConditions(data, conditions) {
+export default function ProcessingConditions(data: { [key: string]: any }, conditions: { name: string, operator: string, value: any }[]): boolean {
     // Check if the object and the conditions array are valid
     if (typeof data !== 'object' || !Array.isArray(conditions)) {
         throw new Error('Invalid input data.');

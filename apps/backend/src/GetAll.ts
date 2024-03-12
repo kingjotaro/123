@@ -1,5 +1,5 @@
-import Router from 'koa-router';
-import Drawer from './Schema.js';
+import Router from "koa-router"
+import Drawer from './Schema';
 
 const router = new Router();
 
@@ -17,7 +17,7 @@ router.get('/getall', async (ctx) => {
         ctx.body = drawerDocs;
     } catch (error) {
         ctx.status = 500;
-        ctx.body = { error: error.message };
+        ctx.body = { error};
     }
 });
 
