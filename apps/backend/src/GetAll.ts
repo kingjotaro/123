@@ -13,8 +13,11 @@ router.get('/getall', async (ctx) => {
             return;
         }
 
-        ctx.status = 200;
+        
+        console.log(ctx.status)
         ctx.body = drawerDocs;
+
+        return ctx.status = 200;
     } catch (error) {
         ctx.status = 500;
         ctx.body = { error};

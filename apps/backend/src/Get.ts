@@ -23,8 +23,9 @@ router.get('/get', async (ctx: ParameterizedContext) => {
             return;
         }
 
-        ctx.status = 200;
+        
         ctx.body = drawerDoc;
+        return ctx.status = 200;
     } catch (error) {
 
         ctx.status = 500;
