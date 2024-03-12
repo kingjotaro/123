@@ -52,7 +52,11 @@ This repository utilizes Turbo Build to automate the process of building, testin
 
 4. **Create .env file with MONGO_URI:** 
 
-   Create a `.env` file with your `MONGO_URI` or use that ```MONGO_URI='mongodb+srv://rafaelleet:a9n7w9d4@vum-c0.enxoa6a.mongodb.net/?retryWrites=true&w=majority&appName=Vum-c0/'``` to connect to your data on the backend repository root.
+   Create a `.env` file with your `MONGO_URI` or use that 
+   ```
+   MONGO_URI='mongodb+srv://rafaelleet:a9n7w9d4@vum-c0.enxoa6a.mongodb.net/?retryWrites=true&w=majority&appName=Vum-c0/'
+   ```
+    to connect to your data on the backend repository root.
 
 
 5. **Execute Turbo Dev:**
