@@ -17,13 +17,16 @@ router.post('/execution/:param', async (ctx: ParameterizedContext) => {
     }
 
     const url = `http://localhost:3000/get?name=${param}`;
+
+
     try {
         const response = await fetch(url);
 
-        if (!response.ok) {
-            throw new Error(`Failed to fetch data from ${url}. Status: ${response.status}`);
-        }
-
+       if (!response.ok) {
+        
+        ctx.body = { error: `Failed to fetch data from ${url}. Status: ${response.status}` }; 
+        return; 
+    }
         const responseData = await response.json();
 
         if (!responseData) {
