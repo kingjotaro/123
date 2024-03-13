@@ -36,8 +36,6 @@ interface NodeData {
     nodes: NodeData[];
     edges: EdgeData[];
   }
-  
-
 
 router.post('/post', async (ctx: ParameterizedContext) => {
     try {

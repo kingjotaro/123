@@ -1,56 +1,50 @@
-import supertest from 'supertest';
-import app from '../index';
-import Drawer from '../Schema';
+import supertest from "supertest";
+import app from "../index";
+import Drawer from "../Schema";
 
-it('Should return status 200 and drawer document if name is provided', async () => {
-    // Test setup
-    const name = 'exampleName';
+it("should return 400 if name parameter is missing", async () => {
+  const response = await supertest(app.callback()).get("/get").expect(400);
 
-    // Request execution
-    const response = await supertest(app.callback())
-      .get(`/get?name=${name}`);
+  expect(response.body).toHaveProperty(
+    "error",
+    "Name parameter is missing in the query string"
+  );
+});
 
-    // Results verification
-    expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('name', name);
-    // Add more assertions if needed to verify the structure of the response
-  });
+it("should return 404 if drawer is not found", async () => {
+  const response = await supertest(app.callback())
+    .get("/get")
+    .query({ name: "************" })
+    .expect(404);
 
-  it('Should return status 400 if name parameter is missing', async () => {
-    // Request execution
-    const response = await supertest(app.callback())
-      .get('/get');
+  expect(response.body).toHaveProperty(
+    "error",
+    "Drawer not found for the provided name"
+  );
+});
 
-    // Results verification
-    expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty('error', 'Name parameter is missing in the query string');
-  });
+it("should return 200 with drawer document if found", async () => {
+  
+  
 
-  it('Should return status 404 if drawer document is not found for the provided name', async () => {
-    // Test setup
-    const name = 'nonexistentName';
 
-    // Request execution
-    const response = await supertest(app.callback())
-      .get(`/get?name=${name}`);
+  const response = await supertest(app.callback())
+    .get("/get")
+    .query({ name: "todos os conditions" })
+    .expect(200);
 
-    // Results verification
-    expect(response.status).toBe(404);
-    expect(response.body).toHaveProperty('error', 'Drawer not found for the provided name');
-  });
+  expect(response.body)
+});
 
-  it('Should handle internal server errors properly', async () => {
-    // Mocking a scenario where an internal server error occurs
-    jest.spyOn(Drawer, 'findOne').mockImplementation(() => {
-      throw new Error('Internal server error');
-    });
+it("should return 500 in case of internal server error", async () => {
+  jest
+    .spyOn(Drawer, "findOne")
+    .mockRejectedValueOnce(new Error("Database error"));
 
-    // Request execution
-    const response = await supertest(app.callback())
-      .get('/get');
+  const response = await supertest(app.callback())
+    .get("/get")
+    .query({ name: "testDrawer" })
+    .expect(500);
 
-    // Results verification
-    expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty('error', "Name parameter is missing in the query string");
-  });
-
+  expect(response.body).toHaveProperty("error", "Internal server error");
+});
