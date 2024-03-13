@@ -8,7 +8,7 @@ router.get('/get', async (ctx: ParameterizedContext) => {
     try {
         const { name } = ctx.query;
 
-        if (!name) {
+        if (!name || name === "") {
             ctx.status = 400;
             ctx.body = { error: 'Name parameter is missing in the query string' };
             return;
