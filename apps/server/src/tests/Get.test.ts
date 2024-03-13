@@ -24,16 +24,12 @@ it("should return 404 if drawer is not found", async () => {
 });
 
 it("should return 200 with drawer document if found", async () => {
-  
-  
-
-
   const response = await supertest(app.callback())
     .get("/get")
     .query({ name: "todos os conditions" })
     .expect(200);
 
-  expect(response.body)
+  expect(response.body);
 });
 
 it("should return 500 in case of internal server error", async () => {

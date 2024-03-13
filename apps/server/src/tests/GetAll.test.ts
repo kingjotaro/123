@@ -1,43 +1,28 @@
-import supertest from 'supertest';
-import app from '../index';
-import Drawer from '../Schema';
+import Drawer from "../Schema";
+import supertest from "supertest";
+import app from "../index";
 
-it('Should return status 200 and drawer documents if data is found in the database', async () => {
-    // Request execution
-    const response = await supertest(app.callback())
-      .get('/getall');
+it("should return 404 if no data found in the database", async () => {
+  jest.spyOn(Drawer, "find").mockResolvedValueOnce([]);
 
-    // Results verification
-    expect(response.status).toBe(200);
-    expect(response.body).not.toBeNull();
-    // Add more assertions if needed to verify the structure of the response
-  });
+  const response = await supertest(app.callback()).get("/getall").expect(404);
 
-  it('Should return status 404 if no data is found in the database', async () => {
-    // Mocking a scenario where no data is found in the database
-    jest.spyOn(Drawer, 'find').mockResolvedValue([]);
+  expect(response.body).toHaveProperty(
+    "error",
+    "No data found in the database"
+  );
+});
 
-    // Request execution
-    const response = await supertest(app.callback())
-      .get('/getall');
+it("should return 200 with drawer documents if data found in the database", async () => {
+  const response = await supertest(app.callback()).get("/getall").expect(200);
 
-    // Results verification
-    expect(response.status).toBe(404);
-    expect(response.body).toHaveProperty('error', 'No data found in the database');
-  });
+  expect(response.body);
+});
 
-  it('Should handle internal server errors properly', async () => {
-    // Mocking a scenario where an internal server error occurs
-    jest.spyOn(Drawer, 'find').mockImplementation(() => {
-      throw new Error('Internal server error');
-    });
+it("should return 500 in case of internal server error", async () => {
+  jest.spyOn(Drawer, "find").mockRejectedValueOnce(new Error("Database error"));
 
-    // Request execution
-    const response = await supertest(app.callback())
-      .get('/getall');
+  const response = await supertest(app.callback()).get("/getall").expect(500);
 
-    // Results verification
-    expect(response.status).toBe(500);
-    expect(response.body).toHaveProperty('error', 'Internal server error');
-  });
-
+  expect(response.body).toHaveProperty( "error", "Internal server error" );
+});
