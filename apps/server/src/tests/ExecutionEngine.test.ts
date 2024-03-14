@@ -44,7 +44,7 @@ it("should return result data", async () => {
 it("should return result data", async () => {
   const response = await supertest(app.callback())
     .post("/execution/teste")
-    .send({"teste":"800"})
+    .send({"teste":"9999"})
     .expect(200);
 
   expect(response.body).toHaveProperty( "decision",true);
