@@ -30,6 +30,19 @@ This repository utilizes Turbo Build to automate the process of building, testin
 - **package.json (backend)**: Specific configurations for the back-end.
 - **package.json (dev-1)**: General project configurations.
 
+## My challenge report and decisions
+
+[Challenge Report](ChallengeReport.md)
+
+## Backend Endpoints
+
+[Backend.MD](Backend.md)
+
+## Frontend Design Data Flow 
+
+![design data front](image-1.png)
+
+
 ## Running the Project
 
 1. **Clone the repository:**
