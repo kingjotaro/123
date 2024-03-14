@@ -14,7 +14,7 @@ export default async function ExecutionEngine(name: string, data: { [key: string
         throw new Error('Error');
       }
   
-      const responseData = await response.json(); 
+      const responseData = await response.text(); 
   
       console.log(responseData); 
       return responseData; 

@@ -12,7 +12,7 @@ export default function ProcessingConditions(data: { [key: string]: any }, condi
         throw new Error('Invalid input data.');
     }
 
-    let finalResult = null;
+    let finalResult = undefined
 
     // Iterate over each condition in the conditions array
     conditions.forEach(condition => {
@@ -24,7 +24,7 @@ export default function ProcessingConditions(data: { [key: string]: any }, condi
             const dataValue = parseFloat(data[name]);
             const conditionValue = parseFloat(value);
 
-            let comparisonResult = false;
+            let comparisonResult = undefined;
 
             // Perform the comparison based on the operator
             switch (operator) {
@@ -43,12 +43,13 @@ export default function ProcessingConditions(data: { [key: string]: any }, condi
                 case '==':
                     comparisonResult = dataValue === conditionValue;
                     break;
-                default:
-                    throw new Error('Invalid operator.');
+                default: comparisonResult = "Condition not satisfied"
             }
 
-            finalResult = finalResult && comparisonResult;
+            finalResult = comparisonResult;
         }
+        
+        
     });
 
     return finalResult;

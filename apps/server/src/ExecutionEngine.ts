@@ -48,7 +48,7 @@ router.post('/execution/:param', async (ctx: ParameterizedContext) => {
         
         // Respond with the processed result
         ctx.status = 200;
-        ctx.body = { result };
+        ctx.body =  result;
         
     } catch (error) {
         // Handle internal server error
