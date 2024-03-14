@@ -44,11 +44,11 @@ router.post('/execution/:param', async (ctx: ParameterizedContext) => {
         }
 
         // Process conditions based on the fetched data
-        const result = ProcessingConditions(requestData, TrimeConditions(GetCondition(responseData)));
+        const decision = ProcessingConditions(requestData, TrimeConditions(GetCondition(responseData)));
         
         // Respond with the processed result
         ctx.status = 200;
-        ctx.body =  result;
+        ctx.body =  {"decision":decision}
         
     } catch (error) {
         // Handle internal server error

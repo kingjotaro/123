@@ -42,6 +42,7 @@ function TestButton({ selectedObjectName }: propsName) {
       
       if(result !== "true" && result !== "false") {
         setShowMessageEmpty(true)
+        setShowMessage(false);
         return;
       } 
      
@@ -90,8 +91,8 @@ return (
     )}
 
     {showMessageEmpty && ( 
-      <div>
-        Falhou porra
+      <div className='flex flex-col justify-center items-center gap-1 mt-5 text-red-500 font-bold'>
+       Please verify your condition policy!
          </div>
     )}
 

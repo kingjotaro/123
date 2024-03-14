@@ -38,7 +38,7 @@ it("should return result data", async () => {
     .send({"teste":"150"})
     .expect(200);
 
-  expect(response.body).toHaveProperty( "result",false);
+  expect(response.body).toHaveProperty( "decision",false);
 });
 
 it("should return result data", async () => {
@@ -47,5 +47,5 @@ it("should return result data", async () => {
     .send({"teste":"190"})
     .expect(200);
 
-  expect(response.body).toHaveProperty( "result",true);
+  expect(response.body).toHaveProperty( "decision",true);
 });
