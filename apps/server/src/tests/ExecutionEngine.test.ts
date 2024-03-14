@@ -1,42 +1,51 @@
-import supertest from 'supertest';
-import app from '../index';
-import Drawer from '../Schema';
+import supertest from "supertest";
+import app from "../index";
 
-it('Should return status 200 and result', async () => {
-  
-  const requestData = {
-    name: 123 
-  };
+const url = 'http://localhost:3000/get?name=parameter'
 
-  
-  const param = '123';
-
-  
+it("should return error if failed to fetch data", async () => {
   const response = await supertest(app.callback())
-    .post(`/execution/${param}`)
-    .send(requestData);
+    .post("/execution/parameter")
+    .send({ requestData: "data" })
+    .expect(200);
 
-  
-  expect(response.status).toBe(200);
-
- 
-  expect(response.body).toHaveProperty('result');
+  expect(response.body).toHaveProperty(
+    "error",
+    `Failed to fetch data from ${url}. Status: 404`
+  );
 });
 
-  it('Should handle errors properly', async () => {
-   
-    const requestData = {
-      rafael: "50",
-      dias: "10",
-      teste: "5"
-    };
-    const param = ''; 
+it("should return 500 if failed to parse JSON response", async () => {
+  jest.spyOn(global, "fetch").mockResolvedValueOnce({
+    ok: true,
+    json: jest.fn().mockRejectedValueOnce(new Error(`Failed to parse JSON response from ${url}`)),
+  } as any);
 
-  
-    const response = await supertest(app.callback())
-      .post(`/execution/${param}`)
-      .send(requestData);
+  const response = await supertest(app.callback())
+    .post("/execution/parameter")
+    .send({ requestData: "example data" })
+    .expect(500);
 
-    
-    expect(response.status).toBe(404);
-  });
+  expect(response.body).toHaveProperty(
+    "error",
+    `Failed to parse JSON response from ${url}`
+  );
+});
+
+it("should return result data", async () => {
+  const response = await supertest(app.callback())
+    .post("/execution/teste")
+    .send({"teste":"150"})
+    .expect(200);
+
+  expect(response.body).toHaveProperty( "result",false);
+});
+
+it("should return result data", async () => {
+  const response = await supertest(app.callback())
+    .post("/execution/teste")
+    .send({"teste":"190"})
+    .expect(200);
+
+  expect(response.body).toHaveProperty( "result",true);
+});
