@@ -1,10 +1,18 @@
+/**
+ * Checks if the provided data meets all specified conditions.
+ * @param data An object containing the data to be checked.
+ * @param conditions An array of objects representing conditions to be applied to the data.
+ * Each condition object must have properties 'name' (name of the field), 'operator' (comparison operator), and 'value' (value to be compared).
+ * @returns true if all conditions are met, otherwise false.
+ * @throws Error if the input data is invalid or an invalid operator is specified.
+ */
 export default function ProcessingConditions(data: { [key: string]: any }, conditions: { name: string, operator: string, value: any }[]): boolean {
-    // Check if the object and the conditions array are valid
+
     if (typeof data !== 'object' || !Array.isArray(conditions)) {
         throw new Error('Invalid input data.');
     }
 
-    let finalResult = true; // Start as true, if at least one condition is missing, it will remain true
+    let finalResult = null;
 
     // Iterate over each condition in the conditions array
     conditions.forEach(condition => {
@@ -39,7 +47,6 @@ export default function ProcessingConditions(data: { [key: string]: any }, condi
                     throw new Error('Invalid operator.');
             }
 
-            // Update the final result based on the current comparison
             finalResult = finalResult && comparisonResult;
         }
     });
