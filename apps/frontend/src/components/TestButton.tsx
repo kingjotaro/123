@@ -65,16 +65,16 @@ return (
     </div>
 
     {fields.map((field, index) => (
-      <div className='flex flex-row' key={index}>
+      <div className='flex flex-row gap-1' key={index}>
         <input
-          className='w-20 gap-1 '
+          className='w-20 border border-gray-300 rounded'
           type="text"
           placeholder="Key"
           value={field.key}
           onChange={(e) => handleChange(index, e, 'key')}
         />
         <input
-          className='w-20'
+          className='w-20  border border-gray-300 rounded'
           type="text"
           placeholder="Value"
           value={field.value}

@@ -55,15 +55,15 @@ function DownloadAllPolicyButton({selectedObjectName, setSelectedObjectName}: pr
   }, [selectedObject, setEdges, setNodes]);
 
   return (
-    <div className='mt-1'>
-      <div className='flex flex-row gap-5'>
+    <div className=' flex flex-col mt-1'>
+      <div className='flex flex-row gap-5 items-center justify-around mb-3'>
       <button className='bg-gray-300 hover:bg-teal-300 text-gray-800 font-bold border border-black  px-2 rounded' onClick={refresh}>Refresh list</button>
       <button className='bg-gray-300 hover:bg-teal-300 text-gray-800 font-bold border border-black  px-2 rounded' onClick={toggleList}>Show list</button>
       </div>
       {showList && (
-        <div className='flex flex-row gap-1 mt-1'>
-          <label className='text-gray-800 font-bold' htmlFor="objectSelect">Select an Policy:</label>
-          <select className='border border-black rounded' onChange={handleSelectChange} value={selectedObjectName}>
+        <div className='flex flex-row'>
+          <label className='text-gray-800 font-bold h-10' htmlFor="objectSelect">Select an Policy:</label>
+          <select className='border border-black rounded h-10' onChange={handleSelectChange} value={selectedObjectName}>
             {objects.map(obj => (
               <option className='bg-gray-300 border' key={obj._id} value={obj.name}>{obj.name}</option>
             ))}

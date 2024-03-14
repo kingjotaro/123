@@ -1,5 +1,11 @@
-import { Node, Edge } from "reactflow";
+/**
+ * Function to send data to a server.
+ * @param data Object containing the name, nodes, and edges.
+ * @returns Promise that resolves to the data returned by the server.
+ * @throws Error if there is any problem during data sending.
+ */
 
+import { Node, Edge } from "reactflow";
 export default async function postData(data: { name: string; nodes: Node[]; edges: Edge[]; }) {
     const url = "http://localhost:3000/post";
   
@@ -21,4 +27,3 @@ export default async function postData(data: { name: string; nodes: Node[]; edge
       throw new Error('Error:'+ error);
     }
   }
-  
