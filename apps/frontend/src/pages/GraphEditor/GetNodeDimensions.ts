@@ -1,6 +1,5 @@
 import { NodeName } from "./Nodes";
 
-
 export function getNodeDimensions(nodeName: NodeName) {
     // Make node dimensions a multiple of this size in order to make nodes align
     // with the grid and thus make debugging easier.

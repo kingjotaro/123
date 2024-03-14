@@ -3,33 +3,36 @@ import { graph } from "@src/pages/GraphEditor/Graph";
 import { useContext } from "react";
 import postData from '@src/pages/GraphEditor/API/Post';
 
-
-
+/**
+ * Component for uploading policies.
+ * @returns JSX element representing the upload policy button component.
+ */
 function UploadPolicyButton() {
   const { nodes, edges} = useContext(graph);
  
   const [error, setError] = useState('');
   const [name, setName] = useState('')
 
-  
+  /**
+   * Function to handle the policy upload.
+   */
   async function handleUpload() {
     try {
       if (!name.trim()) {
-       
         setError('Need a policy name');
-
-
-        return 
+        return;
       }
       const responseData = await postData({ name, nodes, edges });
       console.log('Data send:', responseData);
     } catch (error) {
-      
       console.error('Error not send', error);
     }
   }
 
-
+  /**
+   * Function to handle changes in the policy name.
+   * @param event The change event.
+   */
   function handleNameChange(event: { target: { value: SetStateAction<string>; }; }) {
     setName(event.target.value);
   }
@@ -40,7 +43,6 @@ function UploadPolicyButton() {
         type="text"
         value={name}
         onChange={handleNameChange}
-
         placeholder={error == '' ? "Policy name" : error }
       />
       <button className='bg-gray-300 hover:bg-teal-300 text-gray-800 font-bold border border-black px-2 rounded' onClick={handleUpload}>Save</button>

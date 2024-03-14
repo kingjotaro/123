@@ -8,16 +8,15 @@ import { UserAddableNodeName } from "../../Nodes";
 import { ChooseNodeButton } from "./ChooseNodeButton";
 import Conditions from "./Conditions/Conditions";
 
-
-
-
+/**
+ * Component representing the drawer for choosing a new node.
+ * @param {ChooseNodeDrawerProps} id - The ID of the edge to add the node after.
+ * @returns {JSX.Element} JSX element representing the choose node drawer.
+ */
 export function ChooseNodeDrawer({ id: edgeToAddNodeAfter, }: ChooseNodeDrawerProps) {
-
-
 
   const { drawerVisible, closeEditorDrawer } = useContext(editor);
   const { addNodeAfterEdge, edges } = useContext(graph);
-
 
   const [comparisonType, setComparisonType] = useState("");
   const [greaterValue, setGreaterValue] = useState('');
@@ -27,24 +26,21 @@ export function ChooseNodeDrawer({ id: edgeToAddNodeAfter, }: ChooseNodeDrawerPr
   const [lowerOrEqualValue, setLowerOrEqualValue] = useState('');
   const [nameCondition, setNameCondition] = useState('');
 
-
-
+  /**
+   * Handles the button click event for adding a node with conditions.
+   * @param {UserAddableNodeName} nodeName - The name of the node to add.
+   * @param {Policy} condition - The condition policy for the node.
+   */
   function onButtonClick(nodeName: UserAddableNodeName, condition: Policy) {
-
     if (edgeToAddNodeAfter !== undefined) {
       const edge = edges.find((edge) => edge.id === edgeToAddNodeAfter)!;
-
       addNodeAfterEdge({
         nodeName,
         edge,
         condition,
       });
-
     }
   };
-
-
-
 
   return (
     <Drawer
@@ -59,40 +55,35 @@ export function ChooseNodeDrawer({ id: edgeToAddNodeAfter, }: ChooseNodeDrawerPr
                 }
                 label="Conditional"
                 onClick={() => {
-                    let Value = '';
-                  
-                    switch (comparisonType) {
-                      case "greater":
-                        Value = greaterValue;
-                        break;
-                      case "greaterEqual":
-                        Value = greaterOrEqualValue;
-                        break;
-                      case "lower":
-                        Value = lowerValue;
-                        break;
-                      case "lowerEqual":
-                        Value = lowerOrEqualValue;
-                        break;
-                      case "Equal":
-                        Value = equalValue;
-                        break;
-                      default:
-                        Value = 'Condition Unknown'; 
-                        break;
-                    }
-                  
-
+                  let Value = '';
+                  switch (comparisonType) {
+                    case "greater":
+                      Value = greaterValue;
+                      break;
+                    case "greaterEqual":
+                      Value = greaterOrEqualValue;
+                      break;
+                    case "lower":
+                      Value = lowerValue;
+                      break;
+                    case "lowerEqual":
+                      Value = lowerOrEqualValue;
+                      break;
+                    case "Equal":
+                      Value = equalValue;
+                      break;
+                    default:
+                      Value = 'Condition Unknown';
+                      break;
+                  }
                   onButtonClick(
                     "conditional",
                     {
                       name: nameCondition,
                       value: Value,
                       policy: comparisonType
-
                     }
                   );
-
                 }}
               />
             </div>

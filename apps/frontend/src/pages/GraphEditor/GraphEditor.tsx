@@ -6,22 +6,21 @@ import { CurrentDrawer } from "./Drawers";
 import { EditorProvider } from "./Editor";
 import { GraphProvider, graph } from "./Graph";
 import { allNodes } from "./Nodes";
-import {generateEdge} from './GenerateEdge'
+import { generateEdge } from './GenerateEdge'
 import { positionNodes } from "./PositionNodes";
 import { generateNode } from "./GenerateNode";
-
 import DownloadAllPolicyButton from "@src/components/DownloadAllPolicyButton";
 import UploadPolicyButton from "@src/components/UploadPolicyButton";
 import TestButton from "@src/components/TestButton";
-
 
 const edgeTypes = {
   "add-node": AddNodeEdge,
 };
 
+/**
+ * Main component for the ReactFlow sandbox.
+ */
 function ReactFlowSandbox() {
-
-
   const {
     nodes,
     edges,
@@ -33,10 +32,12 @@ function ReactFlowSandbox() {
   } = useContext(graph);
 
   const [selectedObjectName, setSelectedObjectName] = useState('');
-  
   const [centeredGraphAtStart, setCenteredGraphAtStart] = useState(false);
   const reactFlowRef = useRef<HTMLDivElement>(null);
 
+  /**
+   * Try to center the graph at the start.
+   */
   const tryCenteringGraph = useCallback(() => {
     if (centeredGraphAtStart) {
       return;
@@ -67,7 +68,6 @@ function ReactFlowSandbox() {
         source: "start",
         target: initialNodes[1].id,
       }),
-      
     ];
     const [positionedNodes, positionedEdges] = positionNodes(
       initialNodes,
@@ -75,23 +75,15 @@ function ReactFlowSandbox() {
     );
     setNodes(positionedNodes);
     setEdges(positionedEdges);
-    
   }, []);
 
-  
-
-  
   return (
-    
-    <div className="h-full flex flex-row overflow-hidden w-full relative"> 
-    
-    <div className="flex flex-col items-center p-2">
-   
-    <DownloadAllPolicyButton selectedObjectName={selectedObjectName} setSelectedObjectName={setSelectedObjectName}></DownloadAllPolicyButton>
-    <UploadPolicyButton/>
-    <TestButton selectedObjectName={selectedObjectName} setSelectedObjectName={setSelectedObjectName}></TestButton>
-    </div>
-    
+    <div className="h-full flex flex-row overflow-hidden w-full relative">
+      <div className="flex flex-col items-center p-2">
+        <DownloadAllPolicyButton selectedObjectName={selectedObjectName} setSelectedObjectName={setSelectedObjectName}></DownloadAllPolicyButton>
+        <UploadPolicyButton/>
+        <TestButton selectedObjectName={selectedObjectName} setSelectedObjectName={setSelectedObjectName}></TestButton>
+      </div>
       <ReactFlow
         ref={reactFlowRef}
         nodes={nodes}
@@ -101,30 +93,23 @@ function ReactFlowSandbox() {
         onInit={setReactFlowInstance}
         nodesDraggable={false}
         deleteKeyCode={null}
-        
       >
         <Background className="bg-N-75" size={2} color="#C1C4D6" />
       </ReactFlow>
       <CurrentDrawer />
     </div>
-   
   );
 }
 
+/**
+ * Main component for the Graph Editor.
+ */
 export function GraphEditor() {
-
-  
-
-
   return (
-    <EditorProvider >
-     
+    <EditorProvider>
       <GraphProvider>
-     
         <ReactFlowSandbox />
-        
       </GraphProvider>
-      
     </EditorProvider>
   );
 }

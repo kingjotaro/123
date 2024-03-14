@@ -21,21 +21,27 @@ import { Dispatch, SetStateAction } from "react";
 import { ReactFlowInstance } from "reactflow";
 import { NodeName } from "./Nodes";
 
-
-
+/**
+ * Context to provide graph-related functionality and data to components.
+ */
 export const graph = createContext({} as Graph);
 
 // "Big" is arbitrary, and in this context it is used to define if a graph zoom
 // should focus on the entire graph or only at the beginning of it (start block part).
 const arbitraryBigHeight = 1000;
 
+/**
+ * Represents a policy definition.
+ */
 export type Policy = {
   name: string;
   value: string;
   policy: string;
+};
 
-}
-
+/**
+ * Represents a graph of nodes and edges.
+ */
 export type Graph = {
   nodes: Node[];
   edges: Edge[];
@@ -47,10 +53,12 @@ export type Graph = {
   fitZoomToGraph: (reactFlowRef: RefObject<HTMLDivElement>) => void;
 };
 
+/**
+ * Provider component to wrap the children components with the graph context.
+ * @param {PropsWithChildren} children - The children components.
+ * @returns {JSX.Element} JSX element representing the graph provider.
+ */
 export function GraphProvider({ children }: PropsWithChildren) {
-
-
-
 
   const [reactFlowInstance, setReactFlowInstance] =
     useState<Graph["reactFlowInstance"]>(null);
@@ -69,6 +77,11 @@ export function GraphProvider({ children }: PropsWithChildren) {
     [setNodes, setEdges]
   );
 
+  /**
+   * Adds a node after a specified edge with a given condition.
+   * @param {NodeName} nodeName - The name of the node to add.
+   * @param {Policy} condition - The condition policy for the node.
+   */
   const addNodeAfterEdge: Graph["addNodeAfterEdge"] = ({ nodeName, edge, condition }) => {
     if (!edge) {
       return;
@@ -87,6 +100,10 @@ export function GraphProvider({ children }: PropsWithChildren) {
     positionElements(updatedNodes, updatedEdges);
   };
 
+  /**
+   * Fits the zoom to the graph.
+   * @param {RefObject<HTMLDivElement>} reactFlowRef - Reference to the React Flow container element.
+   */
   function fitZoomToGraph(reactFlowRef: RefObject<HTMLDivElement>) {
     const graphHeight = nodes.reduce((biggestHeight, node) => {
       const graphHeightTillNode = node.position.y;
@@ -121,11 +138,7 @@ export function GraphProvider({ children }: PropsWithChildren) {
     });
   }
 
-
-
-
   return (
-     
     <graph.Provider
       value={{
         nodes,
@@ -140,6 +153,5 @@ export function GraphProvider({ children }: PropsWithChildren) {
     >
       {children}
     </graph.Provider>
-    
   );
 }

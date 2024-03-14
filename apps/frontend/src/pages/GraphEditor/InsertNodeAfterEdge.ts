@@ -8,124 +8,121 @@ import { Policy } from "./Graph";
  * Returns the width and height of the node based on its type.
  */
 
-
+/**
+ * Inserts a new node after the specified edge based on the selected node name.
+ * @param {Edge} edge - The edge after which the new node will be inserted.
+ * @param {SelectedNodeName} nodeName - The name of the node to be inserted.
+ * @param {Edge[]} edges - The array of edges.
+ * @param {Node[]} nodes - The array of nodes.
+ * @param {Policy} condition - The policy condition for the conditional node.
+ * @returns {Object} - An object containing the added node, updated nodes, and updated edges.
+ */
 export function insertNodeAfterEdge<SelectedNodeName extends NodeName>({
-    edge,
-    nodeName,
-    edges,
-    nodes,
-    condition,
-  }: {
-    edge: Edge;
-    nodeName: SelectedNodeName;
-    edges: Edge[];
-    nodes: any;
-    condition: Policy;
-  }): { addedNode: NodeProps<SelectedNodeName>; nodes: any; edges: Edge[] } {
-    let addedNode = {};
-    let returnNodes = null;
-    let returnEdges = null;
+  edge,
+  nodeName,
+  edges,
+  nodes,
+  condition,
+}: {
+  edge: Edge;
+  nodeName: SelectedNodeName;
+  edges: Edge[];
+  nodes: any;
+  condition: Policy;
+}): { addedNode: NodeProps<SelectedNodeName>; nodes: any; edges: Edge[] } {
+  let addedNode = {};
+  let returnNodes = null;
+  let returnEdges = null;
 
-    
-  
-    switch (nodeName) {
-      // End nodes can't be added by Users, so they are never placed between two
-      // nodes, they're always at the end. Their edge is always a new edge.
-      case "end": {
-        const newEndNode = generateNode({
-          nodeName: "end",
-        });
-        const newEdge = generateEdge({
-          source: edge.source,
-          target: newEndNode.id,
-        });
-  
-        addedNode = newEndNode;
-        returnNodes = [...nodes, newEndNode];
-        returnEdges = [...edges, newEdge];
-        break;
+  switch (nodeName) {
+    // End nodes can't be added by Users, so they are never placed between two
+    // nodes, they're always at the end. Their edge is always a new edge.
+    case "end": {
+      const newEndNode = generateNode({
+        nodeName: "end",
+      });
+      const newEdge = generateEdge({
+        source: edge.source,
+        target: newEndNode.id,
+      });
+
+      addedNode = newEndNode;
+      returnNodes = [...nodes, newEndNode];
+      returnEdges = [...edges, newEdge];
+      break;
+    }
+    case "conditional": {
+      let comparisonSymbol = '';
+
+      switch (condition.policy) {
+        case "greater":
+          comparisonSymbol = '>';
+          break;
+        case "greaterEqual":
+          comparisonSymbol = '>=';
+          break;
+        case "lower":
+          comparisonSymbol = '<';
+          break;
+        case "lowerEqual":
+          comparisonSymbol = '<=';
+          break;
+        case "Equal":
+          comparisonSymbol = '==';
+          break;
+        default:
+          comparisonSymbol = '';
+          break;
       }
-      case "conditional": {
-        let comparisonSymbol = '';
-      
-        switch (condition.policy) {
-          case "greater":
-            comparisonSymbol = '>';
-            break;
-          case "greaterEqual":
-            comparisonSymbol = '>=';
-            break;
-          case "lower":
-            comparisonSymbol = '<';
-            break;
-          case "lowerEqual":
-            comparisonSymbol = '<=';
-            break;
-          case "Equal":
-            comparisonSymbol = '==';
-            break;
-          default:
-            comparisonSymbol = ''; 
-            break;
+
+      const newConditionalNode = generateNode({
+        nodeName: "conditional",
+        data: {
+          label: `${condition.name} ${comparisonSymbol} ${condition.value}`
         }
-      
-        const newConditionalNode = generateNode({
-          nodeName: "conditional",
-          data: {
-            label: `${condition.name} ${comparisonSymbol} ${condition.value}`
-          }
-        });
-      
-      
-  
-        const newEndNodes = {
-          branch: generateNode({ nodeName: "end" }),
-        };
-  
-        const newEdges = [
-          generateEdge({
-            source: newConditionalNode.id,
-            target: newEndNodes.branch.id,
-            label: "True",
-          }),
-          
-          generateEdge({
-            source: newConditionalNode.id,
-            target: edge.target,
-            label: "False",
-          }),
-          
-        ];
-       
-        const updatedExistingEdges = edges.map((e) => {
-          if (e.id === edge.id) {
-            return { ...e, target: newConditionalNode.id };
-          }
-          return e;
-        });
+      });
 
+      const newEndNodes = {
+        branch: generateNode({ nodeName: "end" }),
+      };
 
-  
-        const newNodes = [newEndNodes.branch, newConditionalNode];
-        addedNode = newConditionalNode;
-        returnNodes = [...nodes, ...newNodes];
-        returnEdges = [...updatedExistingEdges, ...newEdges];
+      const newEdges = [
+        generateEdge({
+          source: newConditionalNode.id,
+          target: newEndNodes.branch.id,
+          label: "True",
+        }),
 
+        generateEdge({
+          source: newConditionalNode.id,
+          target: edge.target,
+          label: "False",
+        }),
 
-        
-        
-        break;
-      }
+      ];
 
-      
+      const updatedExistingEdges = edges.map((e) => {
+        if (e.id === edge.id) {
+          return { ...e, target: newConditionalNode.id };
+        }
+        return e;
+      });
+
+      const newNodes = [newEndNodes.branch, newConditionalNode];
+      addedNode = newConditionalNode;
+      returnNodes = [...nodes, ...newNodes];
+      returnEdges = [...updatedExistingEdges, ...newEdges];
+
+      break;
     }
 
-        
-  
-    return {
-      
-      addedNode: addedNode as NodeProps<SelectedNodeName>,
-      nodes: returnNodes as Node[],
-      edges: returnEdges as Edge[],
-    };
+
   }
+
+  return {
+
+    addedNode: addedNode as NodeProps<SelectedNodeName>,
+    nodes: returnNodes as Node[],
+    edges: returnEdges as Edge[],
+  };
+}
